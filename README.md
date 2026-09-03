@@ -58,6 +58,28 @@ The interesting work is almost always in the **interaction** — where micro
 decisions aggregate into macro patterns, or where macro conditions constrain
 micro choices in non-obvious ways.
 
+## Part of the HUMMBL ecosystem
+
+This framework is part of [HUMMBL](https://github.com/hummbl-io) — **H**ighly
+**U**seful **M**ental **M**odel **B**ase **L**anguage.
+
+The "Mm" in HUMMBL has a dual reading:
+
+- **M**ental **M**odels — the substrate: structured thinking as executable code
+  ([Base120](https://github.com/hummbl-io/oss/tree/main/packages/python/base120),
+  120 reasoning operators)
+- **M**acro-**m**icro — the application: decompose any subject into levels and
+  find the leverage point (this repo)
+
+Both readings describe the same thing: **structured decomposition of complex
+systems.** Engineers see "mental models" and think "executable reasoning
+operators." Analysts see "macro-micro" and think "economic decomposition
+framework." Same word, same substrate, different doors.
+
+HUMMBL's broader positioning: *structured thinking at fleet scale — one
+operator, governed agents, any domain.* This framework is one of those
+domains.
+
 ## License
 
 MIT OR Apache-2.0 — same as the rest of the hummbl-io fleet.
