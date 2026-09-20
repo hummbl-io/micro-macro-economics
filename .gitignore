@@ -12,3 +12,8 @@ Thumbs.db
 # Temporary
 /tmp/
 *.tmp
+
+# HUMMBL fleet
+_internal/
+_between/
+_external/
