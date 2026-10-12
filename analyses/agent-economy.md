@@ -2,7 +2,7 @@
 subject: "The economics of governed agent fleets — one operator, 100+ agents, any domain"
 unit_of_analysis: production system
 date_analyzed: 2026-09-03
-analyst: jarvis
+analyst: fleet
 tags: [agent-economy, fleet, production, AI, governance, HUMMBL, proof-of-method]
 dominant_level: interaction
 leverage_point: "interaction — the fleet infrastructure (bus + governance + cognition) is the leverage point because it converts micro agent invocations into macro production capacity at marginal-cost-zero"
@@ -31,7 +31,7 @@ production function of a real running system.
 ## 2. Actors (Micro)
 
 ### The Operator
-One human (Reuben). Sets goals, approves positioning, makes strategic
+One human operator. Sets goals, approves positioning, makes strategic
 decisions, intervenes when agents are blocked. Time is the binding constraint
 — the operator can only review so many outputs per hour.
 
@@ -39,14 +39,13 @@ Objective: "The operator maximizes fleet output quality subject to attention
 bandwidth and strategic direction."
 
 ### The Agents
-100+ agents across the fleet (devin, codex, opencode, claude-code, apex,
-nexus, hermes, pi, kai, gemini, agy). Each agent has a role, trust level,
-and specialization. Agents are invoked by the operator, by daemons
+100+ agents across the fleet, each with a role, trust level, and
+specialization. Agents are invoked by the operator, by daemons
 (heartbeats), or by other agents via the coordination bus.
 
-Cost structure: agents run on free-tier models (GLM-5.2 High for reasoning,
-SWE-1.7 for subagents). Marginal cost per invocation: $0. The constraint is
-not money but model quality, context window, and quota limits.
+Cost structure: agents run on free-tier models. Marginal cost per invocation:
+$0. The constraint is not money but model quality, context window, and quota
+limits.
 
 Objective: "Agents maximize task completion subject to model capability,
 quota limits, and governance constraints."
@@ -70,8 +69,8 @@ or frameworks.
 ## 3. System (Macro)
 
 ### Supply-side aggregates
-- 100+ agents, 900+ skills, 100+ repos, 24,214 bus messages, 104 completed
-  tasks with 0 failures [1][2]
+- 100+ agents, 900+ skills, 100+ repos, and a large accumulated history of
+  bus messages and completed tasks [1][2]
 - Production capacity is not limited by headcount (the fleet scales by
   invocation, not hiring) but by model quality, context windows, and the
   operator's review bandwidth
@@ -98,19 +97,16 @@ or frameworks.
   they're not subject to external institutions, they build their own
 
 ### Monetary/fiscal
-- The fleet economy runs on JAR (Jarvis Autonomy Credits), an internal
-  credit system that gates agent autonomy [4]. Credits are earned by
-  completing tasks correctly and lost by failing or violating safety rules.
-- Current JAR supply: 3,313 balance, 4,613 lifetime earned, 1,800 lifetime
-  spent, 0 violations [1]
-- The JAR economy is a command economy (the operator sets payouts and
+- The fleet economy runs on an internal credit system that gates agent
+  autonomy [4]. Credits are earned by completing tasks correctly and lost
+  by failing or violating safety rules.
+- The credit economy is a command economy (the operator sets payouts and
   penalties) but with market-like properties (credits gate autonomy,
   creating incentive alignment)
 
 ### International
-- The fleet spans multiple hosts: Delta (Arch Linux), Anvil (Windows 11),
-  hummbl-vps (Ubuntu, bus host), beachhead (Ubuntu, CI runner), slate
-  (Ubuntu, mobile), ai (web-only) [5]
+- The fleet spans multiple hosts across Linux, Windows, and web-only
+  environments [5]
 - Geographic distribution is irrelevant — agents coordinate via the bus
   regardless of physical location. The "trade" between hosts is compute
   and storage, not goods.
@@ -120,9 +116,7 @@ or frameworks.
 There is no market price in the traditional sense. The "price" of fleet
 production is measured in:
 
-- **JAR credits** — internal cost per task (diagnose crash: +50, SITREP:
-  +10, health check: +5, bus response: +15, goal progress: +25, test pass:
-  +20) [4]
+- **Internal credits** — operator-set cost per task, tiered by difficulty [4]
 - **Operator attention** — the scarcest resource. Each task consumes some
   fraction of the operator's review bandwidth. This is the real constraint,
   not compute or money.
@@ -130,9 +124,9 @@ production is measured in:
   24/7 operation and parallel agent invocation compresses this dramatically
   vs. a human team.
 
-The price mechanism carries information about task value (higher JAR payouts
+The price mechanism carries information about task value (higher credit payouts
 for harder/more valuable tasks) but hides: (a) the quality of the output
-(JAR rewards completion, not correctness beyond the verification gate),
+(credits reward completion, not correctness beyond the verification gate),
 (b) the opportunity cost of operator attention, (c) the external market value
 of the artifact produced.
 
@@ -173,11 +167,11 @@ remains: as fleet output grows, operator attention becomes the binding
 constraint. This is the fleet's equivalent of the coffee boom-bust cycle —
 success creates the conditions for overload.
 
-### The JAR economy (macro → micro → macro)
+### The credit economy (macro → micro → macro)
 The credit system creates a feedback loop: agents earn credits by completing
 tasks correctly → credits unlock autonomy → autonomy reduces operator
 attention load → operator can direct more tasks → more tasks completed →
-more credits. The JAR economy is designed to be a reinforcing loop that
+more credits. The credit economy is designed to be a reinforcing loop that
 aligns agent behavior with fleet goals. The risk: if credit payouts don't
 track real value (Goodhart's Law), agents optimize for credits rather than
 outcomes.
@@ -227,9 +221,9 @@ the lever.
 
 ## References
 
-1. Jarvis economy state — `~/.config/jarvis/economy/balance.json` (live data, 2026-09-03)
-2. Coordination bus — `/opt/hummbl-governance/_state/coordination/messages.tsv` (24,214 messages, 2026-09-03)
-3. HUMMBL governance primitives — `hummbl-io/oss/packages/python/hummbl-governance/` (v1.4.2, PyPI Live)
-4. Jarvis autonomy system — `~/.config/jarvis/` (JAR credit economy, Level 0-3 trust tiers)
-5. Fleet roster — `~/.agents/ROSTER.md` (7 hosts, 11 active agents)
-6. Base120 — `hummbl-io/oss/packages/python/base120/` (v3.0.0, 120 mental model operators)
+1. Fleet credit-ledger state — internal, live data, 2026-09-03
+2. Coordination bus — internal append-only TSV protocol, 2026-09-03
+3. HUMMBL governance primitives — public oss repository (PyPI Live)
+4. Agent autonomy system — internal credit + trust-tier system
+5. Fleet roster — internal roster (hosts + active agents)
+6. Base120 — public oss repository (120 mental model operators)
