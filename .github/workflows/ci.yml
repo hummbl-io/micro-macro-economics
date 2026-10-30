@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate Markdown & Structure
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Validate required documents and relative links
+        run: |
+          python3 - <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+
+          root = Path(".")
+          required = [
+              "README.md",
+              "CONTRIBUTING.md",
+              "LICENSE",
+              "LICENSE-MIT",
+              "LICENSE-APACHE",
+              "docs/methodology.md",
+              "docs/schema.md",
+              "docs/decision-tree.md",
+              "analyses/README.md",
+          ]
+          missing = [p for p in required if not (root / p).is_file()]
+          if missing:
+              sys.exit(f"Missing required files: {missing}")
+
+          link_re = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
+          for md in sorted(root.rglob("*.md")):
+              text = md.read_text(encoding="utf-8")
+              for m in link_re.finditer(text):
+                  target = m.group(1).strip().split("#", 1)[0]
+                  if not target or target.startswith(("http://", "https://", "mailto:")):
+                      continue
+                  resolved = (md.parent / target).resolve()
+                  if not resolved.exists():
+                      sys.exit(f"{md}: broken relative link -> {target}")
+          print("All required documents and Markdown links verified.")
+          PY
